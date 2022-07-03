@@ -1,0 +1,13 @@
+{
+	"mouseSensitivityX": 100,
+	"mouseSensitivityY": 100,
+    "inverted": false,
+	"buttons": {
+		"moveUp": "w",
+		"moveDown": "s",
+		"moveLeft": "a",
+		"moveRight": "d",
+		"interact": "e",
+		"attack": "space"
+	}
+}

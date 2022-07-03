@@ -11,7 +11,7 @@ class AudioManager {
 
 	playSound(src) {
         let sound = new Howl({
-				src: src,
+			src: src,
 		});
         sound.play();
     }
