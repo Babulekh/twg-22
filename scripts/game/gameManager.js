@@ -14,8 +14,8 @@ class GameManager {
 
 	init() {
 		const audioManager = new AudioManager();
-        const levelManager = new LevelManager();
+		const levelManager = new LevelManager();
 
-        audioManager.playSound('');
+		audioManager.playSound('');
 	}
 }
