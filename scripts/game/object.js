@@ -1,4 +1,5 @@
 import { GameManager } from './managers/gameManager'
+import { AudioManager } from './managers/audioManager'
 
 class Object {
 	/* параметры 
@@ -20,6 +21,7 @@ class Object {
 		this.active = active;
 
 		gameManager = new GameManager();
+		audioManager = new AudioManager();
 
 		init();
 	}
@@ -34,12 +36,16 @@ class Object {
 		gameManager.onObjectCreate(this);
 	}
 
-	Move(deltaX, deltaY) {
+	move(deltaX, deltaY) {
 		object.coordX = this.coordX;
 		object.coordY = this.coordY;
 	}
 
-	Destroy() {
+	playSound(src, volume) {
+		audioManager.playSound(src);
+	}
+
+	destroy() {
 		gameManager.onObjectDestroy(this);
 		this = null;
 	}
