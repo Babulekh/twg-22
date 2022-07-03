@@ -1,7 +1,7 @@
-import {HealthStats} from '../objectComponents/healthStats';
+import { HealthStats } from '../objectComponents/healthStats';
 
 class Character {
-    constructor () {
-        this.healthStats = new HealthStats();
-    }
+	constructor() {
+		this.healthStats = new HealthStats();
+	}
 }

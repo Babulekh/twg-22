@@ -1,7 +1,7 @@
 {
 	"mouseSensitivityX": 100,
 	"mouseSensitivityY": 100,
-    "inverted": false,
+	"inverted": false,
 	"buttons": {
 		"moveUp": "w",
 		"moveDown": "s",

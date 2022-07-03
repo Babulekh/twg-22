@@ -1,5 +1,5 @@
-import { AudioManager } from "./audioManager";
-import { LevelManager } from "./levelManager";
+import { AudioManager } from './audioManager';
+import { LevelManager } from './levelManager';
 
 class GameManager {
 	constructor() {
