@@ -1,7 +1,11 @@
 import { Howl, Howler } from 'howler';
 
+interface AudioManager {
+	volume: number;
+}
+
 class AudioManager {
-	constructor(volume) {
+	constructor(volume: number) {
 		this.volume = volume;
 	}
 
@@ -9,10 +13,12 @@ class AudioManager {
 		Howler.volume(this.volume);
 	}
 
-	playSound(src) {
+	playSound(src: string) {
 		let sound = new Howl({
 			src: src,
 		});
 		sound.play();
 	}
 }
+
+export { AudioManager };
