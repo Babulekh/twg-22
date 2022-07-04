@@ -1,4 +1,4 @@
-const Application = PIXI.Application;
+import { Application } from 'pixi.js';
 
 const app = new Application({
 	width: 500,

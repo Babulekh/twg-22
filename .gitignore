@@ -1,8 +1,10 @@
 node_modules/
+build/
 
 .npm
 .env
 .vscode/*
+/*.code-workspace
 
 /dist
 /tmp
