@@ -3,12 +3,13 @@ import { HealthStats } from '../../objectComponents/healthStats';
 
 interface Character {
 	healthStats: HealthStats;
+	onDeath: Function;
 }
 
 class Character extends GameObject {
 	constructor() {
 		super();
-		// this.healthStats = new HealthStats(); todo добавить аргументы
+		this.healthStats = new HealthStats(this, 100, 100, false);
 	}
 }
 

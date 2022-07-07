@@ -6,15 +6,16 @@ interface UserController {
 }
 
 class UserController {
-	constructor() {
-		// реализация синглтона, чтобы в игре существовал лишь один экземпляр контроллера
-		// if (UserController._instance) {
-		// 	return UserController._instance;
-		// }
-		// UserController._instance = this;
-		// todo пофиксить _instance
+	private static _instance: UserController = new UserController();
 
-		this.init();
+	constructor() {
+		if (UserController._instance) throw new Error('Error: Instantiation failed: Use UserController.getInstance() instead of new.');
+		UserController._instance = this;
+		UserController._instance.init();
+	}
+
+	public static getInstance(): UserController {
+		return UserController._instance;
 	}
 
 	init() {

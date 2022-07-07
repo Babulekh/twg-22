@@ -2,32 +2,34 @@ import { AudioManager } from './audioManager';
 import { LevelManager } from './levelManager';
 
 interface GameManager {
-	_instance: any; //todo
 	onObjectCreate: Function;
 	onObjectDestroy: Function;
+	level: number;
 }
 
 class GameManager {
-	level = 0;
+	private static _instance: GameManager = new GameManager();
 
 	constructor() {
-		// синглтон
-		// if (GameManager._instance) {
-		// 	return GameManager._instance;
-		// }
-		// GameManager._instance = this;
-		// todo
-		this.init();
+		if (GameManager._instance) throw new Error('Error: Instantiation failed: Use GameManager.getInstance() instead of new.');
+		GameManager._instance = this;
+		GameManager._instance.init();
+	}
+
+	public static getInstance(): GameManager {
+		return GameManager._instance;
 	}
 
 	init() {
 		const audioManager = new AudioManager(100);
 		const levelManager = new LevelManager();
 
-		levelManager.loadScene(0); // TODO возможность включать другие сцены
-
+		this.level = 0;
+		levelManager.loadScene(this.level);
 		audioManager.playSound('');
 	}
 }
 
 export { GameManager };
+
+// Использование gameManager = GameManager.getInstance();

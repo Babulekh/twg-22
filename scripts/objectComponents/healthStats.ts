@@ -1,5 +1,7 @@
+import { Character } from "../gameObjects/characters/character";
+
 interface HealthStats {
-	owner: PersonObject;
+	owner: Character;
 	maxHealth: number;
 	health: number;
 	isDead: Boolean;
@@ -10,13 +12,8 @@ interface DamageData {
 	//todo
 }
 
-interface PersonObject {
-	onDeath: Function;
-	//todo
-}
-
 class HealthStats {
-	constructor(owner: PersonObject, maxHealth = 100, health = maxHealth, isDead = false) {
+	constructor(owner: Character, maxHealth = 100, health = maxHealth, isDead = false) {
 		this.owner = owner;
 		this.maxHealth = maxHealth;
 		this.health = health;

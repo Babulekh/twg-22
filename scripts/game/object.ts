@@ -3,13 +3,13 @@ import { AudioManager } from './managers/audioManager';
 import { Sprite } from 'pixi.js';
 
 interface GameObject {
-	name: string;
-	id: string;
-	assetSrc: string;
-	coords: Array<number>;
-	rotate: Array<number>;
-	scale: Array<number>;
-	active: Boolean;
+	name: string; // name - string, тип объекта
+	id: string; // id - string, уникальное название объекта, берется из основного спаунера, который хранит в себе информацию о уже существующих объектах и их кол-ве
+	assetSrc: string; // assetSrc - string, путь к ассету
+	coords: Array<number>; // coords - double, координаты объекта (x, y)
+	rotate: Array<number>; // rotate - double, угол поворота объекта (x, y)
+	scale: Array<number>; // scale - double, масштаб объекта
+	active: Boolean; // active - bool, активен ли объект?
 	gameManager: GameManager;
 	audioManager: AudioManager;
 	object: Sprite;
@@ -18,15 +18,6 @@ interface GameObject {
 }
 
 class GameObject {
-	/* параметры 
-		name - string, тип объекта
-        id - string, уникальное название объекта, берется из основного спаунера, который хранит в себе информацию о уже существующих объектах и их кол-ве
-		assetSrc - string, путь к ассету
-		coords - double, координаты объекта (x, y)
-		rotate - double, угол поворота объекта (x, y)
-		scale - double, масштаб объекта
-		active - bool, активен ли объект?
-	*/
 	constructor(name: string = '', id: string = '', assetSrc: string = '/resources/sprites/base.png', coords: Array<number> = [0, 0], rotate: Array<number> = [0, 0], scale: Array<number> = [1, 1], active = true) {
 		this.name = name;
 		this.id = id;
@@ -37,7 +28,7 @@ class GameObject {
 		this.active = active;
 		[this.coordX, this.coordY] = coords;
 
-		this.gameManager = new GameManager();
+		this.gameManager = GameManager.getInstance();
 		this.audioManager = new AudioManager(100);
 
 		this.init();
@@ -47,8 +38,6 @@ class GameObject {
 		this.object = Sprite.from(this.assetSrc);
 		this.object.x = this.coordX;
 		this.object.y = this.coordY;
-
-		// app.stage.addChild(bunny);
 
 		this.gameManager.onObjectCreate(this);
 	}

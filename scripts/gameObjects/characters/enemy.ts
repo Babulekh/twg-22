@@ -15,3 +15,5 @@ class Enemy extends Character {
 		this.activeBehaviour = ActiveBehaviour.Patrol;
 	}
 }
+
+export { Enemy };
