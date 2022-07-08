@@ -22,7 +22,8 @@ class Scene {
 	constructor(level: Level) {
 		this.level = level;
 		this.resolution = 32;
-		this.player = new GameObject('player', '', '../../assets/sprites/Player.png');
+		this.player = new GameObject('player', TileType.Player, '../../assets/sprites/Player.png', this.level.player.coords);
+		this.enemies = this.level.enemies.map((enemy, idx) => new GameObject(`enemy${idx}`, TileType.Enemy, '../../assets/sprites/Enemy.png', enemy.coords));
 	}
 
 	checkCoords(x?: number, y?: number): TileType {
@@ -30,7 +31,7 @@ class Scene {
 	}
 
 	render() {
-		const { board: board, player: player } = this.level;
+		const { board: board, player: player, enemies: enemies } = this.level;
 
 		// const Empty = require('../../assets/sprites/Empty.png');
 		// const Wall = require('../../assets/sprites/Wall.png');
@@ -51,34 +52,35 @@ class Scene {
 				let texture;
 
 				switch (tile) {
+					case TileType.Enemy:
+					case TileType.Player:
 					case TileType.Empty:
 						texture = Texture.from('../../assets/sprites/Empty.png');
-						// sprite = new Sprite(loader.resources['Empty'].texture);
 						sprite = new Sprite(texture);
 						break;
+
 					case TileType.Wall:
 						texture = Texture.from('../../assets/sprites/Wall.png');
-						// sprite = new Sprite(loader.resources['Wall'].texture);
 						sprite = new Sprite(texture);
 						break;
 					// etc...
-					default:
-						break;
 				}
 
-				sprite.x = j * this.resolution;
-				sprite.y = i * this.resolution;
-
-				this.container.addChild(sprite);
+				if (sprite) {
+					sprite.x = j * this.resolution;
+					sprite.y = i * this.resolution;
+					this.container.addChild(sprite);
+				}
 			}
 		}
 
 		// 2. Размещение игрока
-		this.player.setCoords(player.coords[0], player.coords[1]);
-
 		this.container.addChild(this.player.sprite);
 
 		// 3. Размещение врагов
+		for (const enemy of this.enemies) {
+			this.container.addChild(enemy.sprite);
+		}
 	}
 }
 

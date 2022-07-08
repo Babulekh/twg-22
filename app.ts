@@ -9,7 +9,14 @@ const app = new Application({
 });
 
 app.ticker.add((delta) => {
-	// gManager.currentScene.render();
+	gManager.currentScene.enemies.forEach((enemy) => {
+		if (Math.random() < 0.99) return;
+
+		const axis = Math.random() > 0.5 ? 'X' : 'Y';
+
+		if (Math.random() > 0.5) enemy[axis] += 1;
+		else enemy[axis] -= 1;
+	});
 });
 
 function movePlayer({ key }: KeyboardEvent) {

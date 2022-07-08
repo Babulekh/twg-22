@@ -7,7 +7,7 @@ const resolution = 32;
 
 interface GameObject {
 	name: string; // name - string, тип объекта
-	id: string; // id - string, уникальное название объекта, берется из основного спаунера, который хранит в себе информацию о уже существующих объектах и их кол-ве
+	id: TileType; // id - string, уникальное название объекта, берется из основного спаунера, который хранит в себе информацию о уже существующих объектах и их кол-ве
 	assetSrc: string; // assetSrc - string, путь к ассету
 	rotate: Array<number>; // rotate - double, угол поворота объекта (x, y)
 	scale: Array<number>; // scale - double, масштаб объекта
@@ -20,7 +20,7 @@ interface GameObject {
 }
 
 class GameObject {
-	constructor(name: string = '', id: string = '', assetSrc: string = '/assets/sprites/base.png', coords: Array<number> = [0, 0], rotate: Array<number> = [0, 0], scale: Array<number> = [1, 1], active = true) {
+	constructor(name: string = '', id: TileType = TileType.Empty, assetSrc: string = '/assets/sprites/base.png', coords: Array<number> = [0, 0], rotate: Array<number> = [0, 0], scale: Array<number> = [1, 1], active = true) {
 		this.name = name;
 		this.id = id;
 		this.rotate = rotate;
@@ -39,7 +39,9 @@ class GameObject {
 
 	setCoords(x: number, y: number) {
 		if (this.gameManager.currentScene.checkCoords(x, y) !== TileType.Empty) return;
+		this.gameManager.currentScene.level.board[this.coordY][this.coordX] = TileType.Empty;
 		[this.coordX, this.coordY, this.sprite.x, this.sprite.y] = [x, y, x * resolution, y * resolution];
+		this.gameManager.currentScene.level.board[this.coordY][this.coordX] = this.id;
 	}
 
 	get X(): number {
@@ -48,8 +50,10 @@ class GameObject {
 
 	set X(coord: number) {
 		if (this.gameManager.currentScene.checkCoords(coord, this.coordY) !== TileType.Empty) return;
+		this.gameManager.currentScene.level.board[this.coordY][this.coordX] = TileType.Empty;
 		this.coordX = coord;
 		this.sprite.x = coord * resolution;
+		this.gameManager.currentScene.level.board[this.coordY][this.coordX] = this.id;
 	}
 
 	get Y(): number {
@@ -58,8 +62,10 @@ class GameObject {
 
 	set Y(coord: number) {
 		if (this.gameManager.currentScene.checkCoords(this.coordX, coord) !== TileType.Empty) return;
+		this.gameManager.currentScene.level.board[this.coordY][this.coordX] = TileType.Empty;
 		this.coordY = coord;
 		this.sprite.y = coord * resolution;
+		this.gameManager.currentScene.level.board[this.coordY][this.coordX] = this.id;
 	}
 
 	playSound(src: string, volume: number) {
