@@ -1,10 +1,16 @@
 import { AudioManager } from './audioManager';
 import { LevelManager } from './levelManager';
 
+import { Scene } from '../scene';
+import { Container } from 'pixi.js';
+
 interface GameManager {
+	audioManager: AudioManager;
+	levelManager: LevelManager;
+	currentScene: Scene;
+	level: number;
 	onObjectCreate: Function;
 	onObjectDestroy: Function;
-	level: number;
 }
 
 class GameManager {
@@ -13,7 +19,9 @@ class GameManager {
 	constructor() {
 		if (GameManager._instance) throw new Error('Error: Instantiation failed: Use GameManager.getInstance() instead of new.');
 		GameManager._instance = this;
-		GameManager._instance.init();
+		this.audioManager = new AudioManager(100);
+		this.levelManager = new LevelManager();
+		this.init();
 	}
 
 	public static getInstance(): GameManager {
@@ -21,11 +29,8 @@ class GameManager {
 	}
 
 	init() {
-		const audioManager = new AudioManager(100);
-		const levelManager = new LevelManager();
-
 		this.level = 0;
-		levelManager.loadScene(this.level);
+		this.currentScene = this.levelManager.loadScene(this.level);
 		// audioManager.playSound('');
 	}
 }

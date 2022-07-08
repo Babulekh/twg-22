@@ -7,11 +7,13 @@ const app = new Application({
 	backgroundAlpha: 120,
 	antialias: true,
 });
+const gManager = GameManager.getInstance();
 
-app.renderer.backgroundColor = 0x23395d;
+// app.renderer.backgroundColor = 0x23395d;
 app.renderer.resize(window.innerWidth, window.innerHeight);
-app.renderer.view.style.position = 'absolute';
+// app.renderer.view.style.position = 'absolute';
 
 document.body.appendChild(app.view);
+app.stage.addChild(gManager.currentScene.init());
 
-const gManager = GameManager.getInstance();
+console.log(app.stage.children[0].children[25]);

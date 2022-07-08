@@ -2,7 +2,7 @@
 	"compilerOptions": {
 		"outDir": "./build/",
 		"noImplicitAny": true,
-		"module": "ESNext",
+		"module": "esnext",
 		"target": "ES6",
 		"allowJs": true,
 		"moduleResolution": "node",

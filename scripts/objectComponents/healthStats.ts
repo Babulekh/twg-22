@@ -1,4 +1,4 @@
-import { Character } from '../gameObjects/characters/character';
+import { Character } from "../gameObjects/characters/character";
 
 interface HealthStats {
 	owner: Character;
