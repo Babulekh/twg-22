@@ -3,10 +3,10 @@
 		"outDir": "./build/",
 		"noImplicitAny": true,
 		"module": "ESNext",
-		"target": "es5",
+		"target": "ES6",
 		"allowJs": true,
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
-		"allowSyntheticDefaultImports": true,
+		"allowSyntheticDefaultImports": true
 	}
 }

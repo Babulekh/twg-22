@@ -26,7 +26,7 @@ class GameManager {
 
 		this.level = 0;
 		levelManager.loadScene(this.level);
-		audioManager.playSound('');
+		// audioManager.playSound('');
 	}
 }
 

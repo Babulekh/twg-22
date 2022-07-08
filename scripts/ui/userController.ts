@@ -19,6 +19,8 @@ class UserController {
 	}
 
 	init() {
-		// this.controlSettings = JSON.parse(controlSettingsFile); todo я хз ругается чето
+		this.controlSettings = controlSettingsFile;
 	}
 }
+
+export { UserController };
