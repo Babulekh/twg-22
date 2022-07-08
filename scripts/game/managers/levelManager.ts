@@ -4,9 +4,15 @@ interface LevelManager {
 	level: number;
 }
 
+interface PlayerObject {
+	coords: Array<number>;
+	maxHealth: number;
+	health: number;
+}
+
 interface Level {
 	board: Array<Array<number>>;
-	player: Object; // TODO сделать интерфейс игрока
+	player: PlayerObject; // TODO объединить интрефейс игрока с сещуствующим модулем
 	enemies: Array<Object>; // TODO сделать интерфейс врага
 }
 

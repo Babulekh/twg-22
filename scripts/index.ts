@@ -1,7 +1,7 @@
 import { AudioManager } from './game/managers/audioManager';
 import { GameManager } from './game/managers/gameManager';
 import { LevelManager } from './game/managers/levelManager';
-import { GameObject } from './game/object';
+import { GameObject } from './game/gameObject';
 import { Scene } from './game/scene';
 import { Spawner } from './gameObjects/spawner';
 import { Player } from './gameObjects/characters/player';

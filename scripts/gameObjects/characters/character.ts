@@ -1,4 +1,4 @@
-import { GameObject } from '../../game/object';
+import { GameObject } from '../../game/gameObject';
 import { HealthStats } from '../../objectComponents/healthStats';
 
 interface Character {
