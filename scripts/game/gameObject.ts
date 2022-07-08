@@ -1,6 +1,9 @@
 import { GameManager } from './managers/gameManager';
 import { AudioManager } from './managers/audioManager';
 import { Sprite, Texture } from 'pixi.js';
+import { TileType } from './scene';
+
+const resolution = 32;
 
 interface GameObject {
 	name: string; // name - string, тип объекта
@@ -31,28 +34,33 @@ class GameObject {
 		this.sprite = new Sprite(texture);
 
 		[this.coordX, this.coordY] = coords;
-		[this.sprite.x, this.sprite.y] = coords;
+		[this.sprite.x, this.sprite.y] = [coords[0] * resolution, coords[1] * resolution];
 	}
 
-	// setCoords(x: number, y: number) {
-	// 	this.X = x;
-	// 	this.Y = y;
-	// }
+	setCoords(x: number, y: number) {
+		if (this.gameManager.currentScene.checkCoords(x, y) !== TileType.Empty) return;
+		[this.coordX, this.coordY, this.sprite.x, this.sprite.y] = [x, y, x * resolution, y * resolution];
+	}
 
-	// move(deltaX: number, deltaY: number) {
-	// 	this.X += deltaX;
-	// 	this.Y += deltaY;
-	// }
+	get X(): number {
+		return this.coordX;
+	}
 
-	// set X(coord: number) {
-	// 	this.coordX = coord;
-	// 	this.sprite.x = coord;
-	// }
+	set X(coord: number) {
+		if (this.gameManager.currentScene.checkCoords(coord, this.coordY) !== TileType.Empty) return;
+		this.coordX = coord;
+		this.sprite.x = coord * resolution;
+	}
 
-	// set Y(coord: number) {
-	// 	this.coordY = coord;
-	// 	this.sprite.y = coord;
-	// }
+	get Y(): number {
+		return this.coordY;
+	}
+
+	set Y(coord: number) {
+		if (this.gameManager.currentScene.checkCoords(this.coordX, coord) !== TileType.Empty) return;
+		this.coordY = coord;
+		this.sprite.y = coord * resolution;
+	}
 
 	playSound(src: string, volume: number) {
 		this.audioManager.playSound(src);

@@ -12,19 +12,19 @@ app.ticker.add((delta) => {
 	// gManager.currentScene.render();
 });
 
-function movePlayer(event: KeyboardEvent) {
-	switch (event.key) {
+function movePlayer({ key }: KeyboardEvent) {
+	switch (key) {
 		case 'ArrowUp':
-			gManager.currentScene.player.sprite.y -= 32;
+			gManager.currentScene.player.Y -= 1;
 			break;
 		case 'ArrowDown':
-			gManager.currentScene.player.sprite.y += 32;
+			gManager.currentScene.player.Y += 1;
 			break;
 		case 'ArrowLeft':
-			gManager.currentScene.player.sprite.x -= 32;
+			gManager.currentScene.player.X -= 1;
 			break;
 		case 'ArrowRight':
-			gManager.currentScene.player.sprite.x += 32;
+			gManager.currentScene.player.X += 1;
 			break;
 		default:
 			break;

@@ -10,7 +10,7 @@ interface Scene {
 	enemies: Array<GameObject>;
 }
 
-enum TileType {
+export enum TileType {
 	Empty = 0,
 	Wall,
 	Player,
@@ -23,6 +23,10 @@ class Scene {
 		this.level = level;
 		this.resolution = 32;
 		this.player = new GameObject('player', '', '../../assets/sprites/Player.png');
+	}
+
+	checkCoords(x?: number, y?: number): TileType {
+		return this.level.board[y][x];
 	}
 
 	render() {
@@ -70,8 +74,8 @@ class Scene {
 		}
 
 		// 2. Размещение игрока
-		this.player.sprite.x = player.coords[0] * this.resolution;
-		this.player.sprite.y = player.coords[1] * this.resolution;
+		this.player.setCoords(player.coords[0], player.coords[1]);
+
 		this.container.addChild(this.player.sprite);
 
 		// 3. Размещение врагов
