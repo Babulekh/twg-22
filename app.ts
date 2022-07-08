@@ -2,8 +2,8 @@ import { Application } from 'pixi.js';
 import { GameManager } from './scripts';
 
 const app = new Application({
-	width: 600,
-	height: 600,
+	width: 1200,
+	height: 1200,
 	backgroundAlpha: 0,
 	antialias: true,
 });
@@ -21,16 +21,16 @@ app.ticker.add((delta) => {
 
 function movePlayer({ key }: KeyboardEvent) {
 	switch (key) {
-		case 'ArrowUp':
+		case 'w':
 			gManager.currentScene.player.Y -= 1;
 			break;
-		case 'ArrowDown':
+		case 's':
 			gManager.currentScene.player.Y += 1;
 			break;
-		case 'ArrowLeft':
+		case 'a':
 			gManager.currentScene.player.X -= 1;
 			break;
-		case 'ArrowRight':
+		case 'd':
 			gManager.currentScene.player.X += 1;
 			break;
 		default:

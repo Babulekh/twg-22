@@ -3,7 +3,7 @@ import { AudioManager } from './managers/audioManager';
 import { Sprite, Texture } from 'pixi.js';
 import { TileType } from './scene';
 
-const resolution = 32;
+const resolution = 64;
 
 interface GameObject {
 	name: string; // name - string, тип объекта

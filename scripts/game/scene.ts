@@ -15,13 +15,14 @@ export enum TileType {
 	Wall,
 	Player,
 	Enemy,
+	Base,
 	// etc...
 }
 
 class Scene {
 	constructor(level: Level) {
 		this.level = level;
-		this.resolution = 32;
+		this.resolution = 64;
 		this.player = new GameObject('player', TileType.Player, '../../assets/sprites/Player.png', this.level.player.coords);
 		this.enemies = this.level.enemies.map((enemy, idx) => new GameObject(`enemy${idx}`, TileType.Enemy, '../../assets/sprites/Enemy.png', enemy.coords));
 	}
@@ -61,6 +62,10 @@ class Scene {
 
 					case TileType.Wall:
 						texture = Texture.from('../../assets/sprites/Wall.png');
+						sprite = new Sprite(texture);
+						break;
+					case TileType.Base:
+						texture = Texture.from('../../assets/sprites/base.png');
 						sprite = new Sprite(texture);
 						break;
 					// etc...
