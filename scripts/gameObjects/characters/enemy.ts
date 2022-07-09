@@ -1,9 +1,5 @@
+import { ActiveBehaviour } from '../../enums';
 import { Character } from './character';
-
-enum ActiveBehaviour {
-	Patrol = 'patrol',
-	Idle = 'idle',
-}
 
 interface Enemy {
 	activeBehaviour: ActiveBehaviour;

@@ -1,28 +1,19 @@
-import { Container, Loader, Sprite, Texture } from 'pixi.js';
+import { Container, Sprite, Texture } from 'pixi.js';
 import { GameObject } from './gameObject';
-import { Level } from './managers/levelManager';
+import { Level } from '../interfaces';
+import { TileType } from '../enums';
+import { GameManager } from './managers/gameManager';
 
 interface Scene {
 	container: Container;
 	level: Level;
-	resolution: number; // длина стороны спрайта в пикселях
 	player: GameObject;
 	enemies: Array<GameObject>;
-}
-
-export enum TileType {
-	Empty = 0,
-	Wall,
-	Player,
-	Enemy,
-	Base,
-	// etc...
 }
 
 class Scene {
 	constructor(level: Level) {
 		this.level = level;
-		this.resolution = 64;
 		this.player = new GameObject('player', TileType.Player, '../../assets/sprites/Player.png', this.level.player.coords);
 		this.enemies = this.level.enemies.map((enemy, idx) => new GameObject(`enemy${idx}`, TileType.Enemy, '../../assets/sprites/Enemy.png', enemy.coords));
 	}
@@ -34,12 +25,6 @@ class Scene {
 	render() {
 		const { board: board, player: player, enemies: enemies } = this.level;
 
-		// const Empty = require('../../assets/sprites/Empty.png');
-		// const Wall = require('../../assets/sprites/Wall.png');
-
-		// Load resources
-		// const loader: Loader = Loader.shared;
-		// loader.add('Empty', '../../assets/sprites/Empty.png').add('Wall', '../../assets/sprites/Wall.png').load();
 		delete this.container;
 		this.container = new Container();
 
@@ -72,8 +57,8 @@ class Scene {
 				}
 
 				if (sprite) {
-					sprite.x = j * this.resolution;
-					sprite.y = i * this.resolution;
+					sprite.x = j * GameManager.getInstance().resolution;
+					sprite.y = i * GameManager.getInstance().resolution;
 					this.container.addChild(sprite);
 				}
 			}

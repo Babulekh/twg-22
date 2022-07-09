@@ -5,7 +5,7 @@ const app = new Application({
 	width: 1200,
 	height: 1200,
 	backgroundAlpha: 0,
-	antialias: true,
+	antialias: false,
 });
 
 app.ticker.add((delta) => {

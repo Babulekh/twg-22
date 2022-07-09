@@ -1,15 +1,11 @@
-import { Character } from "../gameObjects/characters/character";
+import { DamageData } from '../enums';
+import { Character } from '../gameObjects/characters/character';
 
 interface HealthStats {
 	owner: Character;
 	maxHealth: number;
 	health: number;
 	isDead: Boolean;
-}
-
-interface DamageData {
-	damage: number;
-	//todo
 }
 
 class HealthStats {

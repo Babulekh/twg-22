@@ -1,9 +1,7 @@
 import { GameManager } from './managers/gameManager';
 import { AudioManager } from './managers/audioManager';
 import { Sprite, Texture } from 'pixi.js';
-import { TileType } from './scene';
-
-const resolution = 64;
+import { TileType } from '../enums';
 
 interface GameObject {
 	name: string; // name - string, тип объекта
@@ -12,7 +10,6 @@ interface GameObject {
 	rotate: Array<number>; // rotate - double, угол поворота объекта (x, y)
 	scale: Array<number>; // scale - double, масштаб объекта
 	active: Boolean; // active - bool, активен ли объект?
-	gameManager: GameManager;
 	audioManager: AudioManager;
 	sprite: Sprite;
 	coordX: number;
@@ -27,21 +24,20 @@ class GameObject {
 		this.scale = scale;
 		this.active = active;
 
-		this.gameManager = GameManager.getInstance();
 		this.audioManager = new AudioManager(100);
 
 		const texture = Texture.from(assetSrc);
 		this.sprite = new Sprite(texture);
 
 		[this.coordX, this.coordY] = coords;
-		[this.sprite.x, this.sprite.y] = [coords[0] * resolution, coords[1] * resolution];
+		[this.sprite.x, this.sprite.y] = [coords[0] * GameManager.getInstance().resolution, coords[1] * GameManager.getInstance().resolution];
 	}
 
 	setCoords(x: number, y: number) {
-		if (this.gameManager.currentScene.checkCoords(x, y) !== TileType.Empty) return;
-		this.gameManager.currentScene.level.board[this.coordY][this.coordX] = TileType.Empty;
-		[this.coordX, this.coordY, this.sprite.x, this.sprite.y] = [x, y, x * resolution, y * resolution];
-		this.gameManager.currentScene.level.board[this.coordY][this.coordX] = this.id;
+		if (GameManager.getInstance().currentScene.checkCoords(x, y) !== TileType.Empty) return;
+		GameManager.getInstance().currentScene.level.board[this.coordY][this.coordX] = TileType.Empty;
+		[this.coordX, this.coordY, this.sprite.x, this.sprite.y] = [x, y, x * GameManager.getInstance().resolution, y * GameManager.getInstance().resolution];
+		GameManager.getInstance().currentScene.level.board[this.coordY][this.coordX] = this.id;
 	}
 
 	get X(): number {
@@ -49,11 +45,11 @@ class GameObject {
 	}
 
 	set X(coord: number) {
-		if (this.gameManager.currentScene.checkCoords(coord, this.coordY) !== TileType.Empty) return;
-		this.gameManager.currentScene.level.board[this.coordY][this.coordX] = TileType.Empty;
+		if (GameManager.getInstance().currentScene.checkCoords(coord, this.coordY) !== TileType.Empty) return;
+		GameManager.getInstance().currentScene.level.board[this.coordY][this.coordX] = TileType.Empty;
 		this.coordX = coord;
-		this.sprite.x = coord * resolution;
-		this.gameManager.currentScene.level.board[this.coordY][this.coordX] = this.id;
+		this.sprite.x = coord * GameManager.getInstance().resolution;
+		GameManager.getInstance().currentScene.level.board[this.coordY][this.coordX] = this.id;
 	}
 
 	get Y(): number {
@@ -61,11 +57,11 @@ class GameObject {
 	}
 
 	set Y(coord: number) {
-		if (this.gameManager.currentScene.checkCoords(this.coordX, coord) !== TileType.Empty) return;
-		this.gameManager.currentScene.level.board[this.coordY][this.coordX] = TileType.Empty;
+		if (GameManager.getInstance().currentScene.checkCoords(this.coordX, coord) !== TileType.Empty) return;
+		GameManager.getInstance().currentScene.level.board[this.coordY][this.coordX] = TileType.Empty;
 		this.coordY = coord;
-		this.sprite.y = coord * resolution;
-		this.gameManager.currentScene.level.board[this.coordY][this.coordX] = this.id;
+		this.sprite.y = coord * GameManager.getInstance().resolution;
+		GameManager.getInstance().currentScene.level.board[this.coordY][this.coordX] = this.id;
 	}
 
 	playSound(src: string, volume: number) {
