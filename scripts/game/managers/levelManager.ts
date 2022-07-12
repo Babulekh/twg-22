@@ -1,3 +1,4 @@
+import { Level } from '../../interfaces';
 import { Scene } from '../scene';
 
 interface LevelManager {
@@ -10,7 +11,7 @@ class LevelManager {
 	}
 
 	get scene() {
-		const level = require(`../../../assets/levels/${this.level}.json`);
+		const level: Level = require(`../../../assets/levels/${this.level}.json`);
 		return new Scene(level);
 	}
 }

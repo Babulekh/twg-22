@@ -9,5 +9,6 @@ import { Enemy } from './gameObjects/characters/enemy';
 import { Character } from './gameObjects/characters/character';
 import { HealthStats } from './objectComponents/healthStats';
 import { UserController } from './ui/userController';
+import { Renderer } from './renderer';
 
-export { AudioManager, GameManager, LevelManager, GameObject, Scene, Spawner, Player, Enemy, Character, HealthStats, UserController };
+export { AudioManager, GameManager, LevelManager, GameObject, Scene, Spawner, Player, Enemy, Character, HealthStats, UserController, Renderer };

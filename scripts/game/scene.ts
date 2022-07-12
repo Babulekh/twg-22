@@ -16,6 +16,7 @@ class Scene {
 		this.level = level;
 		this.player = new GameObject('Player', TileType.Player, { x: this.level.player.coords[0], y: this.level.player.coords[1] });
 		this.enemies = this.level.enemies.map((enemy) => new GameObject('Enemy', TileType.Enemy, { x: enemy.coords[0], y: enemy.coords[1] }));
+		this.container = new Container();
 	}
 
 	checkCoords(x?: number, y?: number): TileType {
@@ -24,9 +25,6 @@ class Scene {
 
 	render() {
 		const { board: board } = this.level;
-
-		delete this.container;
-		this.container = new Container();
 
 		// 1. Рендер поля
 		for (let i = 0; i < board.length; i++) {
@@ -50,7 +48,7 @@ class Scene {
 						sprite = new Sprite(texture);
 						break;
 					case TileType.Base:
-						texture = Texture.from('../../assets/sprites/base.png');
+						texture = Texture.from('../../assets/sprites/Base.png');
 						sprite = new Sprite(texture);
 						break;
 					// etc...
