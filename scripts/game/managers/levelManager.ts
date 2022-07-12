@@ -9,16 +9,9 @@ class LevelManager {
 		this.level = level;
 	}
 
-	loadScene(index: number) {
-		const level = require(`../../../assets/levels/${index}.json`); // Устанавливать номер уровня
-
-		let scene = new Scene(level);
-
-		return scene;
-	}
-
-	reloadScene() {
-		this.loadScene(this.level);
+	get scene() {
+		const level = require(`../../../assets/levels/${this.level}.json`);
+		return new Scene(level);
 	}
 }
 

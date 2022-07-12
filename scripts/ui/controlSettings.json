@@ -2,12 +2,12 @@
 	"mouseSensitivityX": 100,
 	"mouseSensitivityY": 100,
 	"inverted": false,
-	"buttons": {
-		"moveUp": "w",
-		"moveDown": "s",
-		"moveLeft": "a",
-		"moveRight": "d",
-		"interact": "e",
-		"attack": "space"
+	"keybindings": {
+		"w": "moveUp",
+		"s": "moveDown",
+		"a": "moveLeft",
+		"d": "moveRight",
+		"e": "interact",
+		" ": "attack"
 	}
 }

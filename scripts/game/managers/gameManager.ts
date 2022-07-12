@@ -2,12 +2,12 @@ import { AudioManager } from './audioManager';
 import { LevelManager } from './levelManager';
 
 import { Scene } from '../scene';
+import { Container } from 'pixi.js';
 
 interface GameManager {
 	audioManager: AudioManager;
 	levelManager: LevelManager;
 	currentScene: Scene;
-	level: number;
 	resolution: number;
 	onObjectCreate: Function;
 	onObjectDestroy: Function;
@@ -22,17 +22,24 @@ class GameManager {
 		this.audioManager = new AudioManager(100);
 		this.levelManager = new LevelManager();
 		this.resolution = 64;
-		this.init();
 	}
 
-	public static getInstance(): GameManager {
+	public static get Instance(): GameManager {
 		return GameManager._instance;
 	}
 
-	init() {
-		this.level = 0;
-		this.currentScene = this.levelManager.loadScene(this.level);
-		// audioManager.playSound('');
+	get level() {
+		return this.levelManager.level;
+	}
+
+	set level(level: number) {
+		this.levelManager.level = level;
+		this.currentScene = this.levelManager.scene;
+		this.currentScene.render();
+	}
+
+	get stage(): Container {
+		return this.currentScene.container;
 	}
 }
 

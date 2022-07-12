@@ -16,4 +16,16 @@ interface Level {
 	enemies: Array<EnemyObject>; // TODO сделать интерфейс врага
 }
 
-export { PlayerObject, EnemyObject, Level };
+interface Coords {
+	x: number;
+	y: number;
+}
+
+interface Settings {
+	mouseSensitivityX: number;
+	mouseSensitivityY: number;
+	inverted: Boolean;
+	keybindings: Object;
+}
+
+export { PlayerObject, EnemyObject, Level, Coords, Settings };

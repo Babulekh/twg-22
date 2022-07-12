@@ -14,8 +14,8 @@ interface Scene {
 class Scene {
 	constructor(level: Level) {
 		this.level = level;
-		this.player = new GameObject('player', TileType.Player, '../../assets/sprites/Player.png', this.level.player.coords);
-		this.enemies = this.level.enemies.map((enemy, idx) => new GameObject(`enemy${idx}`, TileType.Enemy, '../../assets/sprites/Enemy.png', enemy.coords));
+		this.player = new GameObject('Player', TileType.Player, this.level.player.coords);
+		this.enemies = this.level.enemies.map((enemy) => new GameObject('Enemy', TileType.Enemy, enemy.coords));
 	}
 
 	checkCoords(x?: number, y?: number): TileType {
@@ -23,7 +23,7 @@ class Scene {
 	}
 
 	render() {
-		const { board: board, player: player, enemies: enemies } = this.level;
+		const { board: board } = this.level;
 
 		delete this.container;
 		this.container = new Container();
@@ -57,8 +57,8 @@ class Scene {
 				}
 
 				if (sprite) {
-					sprite.x = j * GameManager.getInstance().resolution;
-					sprite.y = i * GameManager.getInstance().resolution;
+					sprite.x = j * GameManager.Instance.resolution;
+					sprite.y = i * GameManager.Instance.resolution;
 					this.container.addChild(sprite);
 				}
 			}
