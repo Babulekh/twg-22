@@ -24,14 +24,11 @@ class GameObject {
 		this.rotate = rotate;
 		this.scale = scale;
 		this.active = active;
+		this.sprite = new Sprite(Texture.from(`../../assets/sprites/${this.name}.png`));
 
+		({ x: this.x, y: this.y } = coords);
 		this.audioManager = new AudioManager(0.5, SoundType.Music);
 		//this.audioManager.playSound('../../../resources/audio/sound.mp3');
-
-		const texture = Texture.from(`../../assets/sprites/${this.name}.png`);
-		this.sprite = new Sprite(texture);
-
-		[this.x, this.y] = [coords.x, coords.y];
 	}
 
 	get x(): number {
@@ -66,8 +63,8 @@ class GameObject {
 		GameManager.Instance.currentScene.level.board[this.y][this.x] = this.id;
 	}
 
-	playSound(src: string, volume: number) {
-		this.audioManager.playSound(src);
+	playSound(src: string) {
+		GameManager.Instance.audioManager.playSound(src);
 	}
 
 	destroy() {
