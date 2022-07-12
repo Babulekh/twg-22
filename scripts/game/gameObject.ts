@@ -1,5 +1,5 @@
 import { GameManager } from './managers/gameManager';
-import { AudioManager } from './managers/audioManager';
+import { AudioManager, SoundType } from './managers/audioManager';
 import { Sprite, Texture } from 'pixi.js';
 import { TileType } from '../enums';
 import { Coords } from '../interfaces';
@@ -27,6 +27,8 @@ class GameObject {
 		this.sprite = new Sprite(Texture.from(`../../assets/sprites/${this.name}.png`));
 
 		({ x: this.x, y: this.y } = coords);
+		this.audioManager = new AudioManager(0.5, SoundType.Music);
+		//this.audioManager.playSound('../../../resources/audio/sound.mp3');
 	}
 
 	get x(): number {

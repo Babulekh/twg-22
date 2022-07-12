@@ -1,4 +1,4 @@
-import { AudioManager } from './audioManager';
+import { AudioManager, SoundType } from './audioManager';
 import { LevelManager } from './levelManager';
 
 import { Scene } from '../scene';
@@ -20,7 +20,7 @@ class GameManager {
 	constructor() {
 		if (GameManager._instance) throw new Error('Error: Instantiation failed: Use GameManager.getInstance() instead of new.');
 		GameManager._instance = this;
-		this.audioManager = new AudioManager(100);
+		this.audioManager = new AudioManager(0.5, SoundType.Default);
 		this.levelManager = new LevelManager();
 		this.renderer = Renderer.Instance;
 		this.resolution = 64;
