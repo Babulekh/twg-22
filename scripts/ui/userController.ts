@@ -18,27 +18,29 @@ class UserController {
 		UserController._instance = this;
 		this.controlSettings = controlSettingsFile;
 
-		window.addEventListener('keydown', this.keyHandler);
+		window.addEventListener('keydown', this.keyHandler.bind(this));
 	}
 
-	keyHandler({ key }: KeyboardEvent) {
+	keyHandler({ code }: KeyboardEvent) {
 		const player = GameManager.Instance.currentScene.player;
-		switch (key) {
-			case 'w':
-				player.y -= 1;
+		switch (code) {
+			case 'KeyW':
+				player.move({ y: -1 });
 				break;
-			case 's':
-				player.y += 1;
+			case 'KeyS':
+				player.move({ y: 1 });
 				break;
-			case 'a':
-				player.x -= 1;
+			case 'KeyA':
+				player.move({ x: -1 });
 				break;
-			case 'd':
-				player.x += 1;
+			case 'KeyD':
+				player.move({ x: 1 });
 				break;
 			default:
 				break;
 		}
+
+		// console.log(this.controlSettings.keybindings[code], code);
 	}
 }
 

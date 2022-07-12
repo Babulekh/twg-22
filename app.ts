@@ -14,8 +14,7 @@ app.ticker.add((delta) => {
 
 		const axis = Math.random() > 0.5 ? 'x' : 'y';
 
-		if (Math.random() > 0.5) enemy[axis] += 1;
-		else enemy[axis] -= 1;
+		enemy.move({[axis]: Math.random() > 0.5 ? 1 : -1})
 	});
 });
 

@@ -1,4 +1,6 @@
+import { TileType } from '../../enums';
 import { GameObject } from '../../game/gameObject';
+import { Coords } from '../../interfaces';
 import { HealthStats } from '../../objectComponents/healthStats';
 
 interface Character {
@@ -7,8 +9,8 @@ interface Character {
 }
 
 class Character extends GameObject {
-	constructor() {
-		super();
+	constructor(name: string, id: TileType, coords: Coords) {
+		super(name, id, coords);
 		this.healthStats = new HealthStats(this, 100, 100, false);
 	}
 }

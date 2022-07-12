@@ -14,8 +14,8 @@ interface Scene {
 class Scene {
 	constructor(level: Level) {
 		this.level = level;
-		this.player = new GameObject('Player', TileType.Player, this.level.player.coords);
-		this.enemies = this.level.enemies.map((enemy) => new GameObject('Enemy', TileType.Enemy, enemy.coords));
+		this.player = new GameObject('Player', TileType.Player, { x: this.level.player.coords[0], y: this.level.player.coords[1] });
+		this.enemies = this.level.enemies.map((enemy) => new GameObject('Enemy', TileType.Enemy, { x: enemy.coords[0], y: enemy.coords[1] }));
 	}
 
 	checkCoords(x?: number, y?: number): TileType {

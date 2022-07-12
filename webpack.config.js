@@ -17,6 +17,14 @@ module.exports = {
 					},
 				],
 			},
+			{
+				test: /\.(mp3|wav)$/i,
+				use: [
+					{
+						loader: 'file-loader',
+					},
+				],
+			},
 		],
 	},
 	resolve: {

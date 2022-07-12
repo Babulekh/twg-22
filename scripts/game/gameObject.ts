@@ -2,6 +2,7 @@ import { GameManager } from './managers/gameManager';
 import { AudioManager } from './managers/audioManager';
 import { Sprite, Texture } from 'pixi.js';
 import { TileType } from '../enums';
+import { Coords } from '../interfaces';
 
 interface GameObject {
 	name: string; // name - string, тип объекта
@@ -12,12 +13,12 @@ interface GameObject {
 	active: Boolean; // active - bool, активен ли объект?
 	audioManager: AudioManager;
 	sprite: Sprite;
-	coordX: number;
-	coordY: number;
+	_x: number;
+	_y: number;
 }
 
 class GameObject {
-	constructor(name: string = 'Wall', id: TileType = TileType.Empty, coords: Array<number> = [0, 0], rotate: Array<number> = [0, 0], scale: Array<number> = [1, 1], active = true) {
+	constructor(name: string = 'Wall', id: TileType = TileType.Empty, coords: Coords, rotate: Array<number> = [0, 0], scale: Array<number> = [1, 1], active = true) {
 		this.name = name;
 		this.id = id;
 		this.rotate = rotate;
@@ -29,61 +30,39 @@ class GameObject {
 		const texture = Texture.from(`../../assets/sprites/${this.name}.png`);
 		this.sprite = new Sprite(texture);
 
-		[this.coordX, this.coordY] = coords;
-		[this.sprite.x, this.sprite.y] = [coords[0] * GameManager.Instance.resolution, coords[1] * GameManager.Instance.resolution];
-	}
-
-	setCoords(x: number, y: number) {
-		if (GameManager.Instance.currentScene.checkCoords(x, y) !== TileType.Empty) return;
-
-		this.onBeforeMove();
-
-		[this.coordX, this.coordY, this.sprite.x, this.sprite.y] = [x, y, x * GameManager.Instance.resolution, y * GameManager.Instance.resolution];
-
-		this.onAfterMove();
-	}
-
-	onBeforeMove() {
-		GameManager.Instance.currentScene.level.board[this.y][this.x] = TileType.Empty;
-	}
-
-	onAfterMove() {
-		GameManager.Instance.currentScene.level.board[this.y][this.x] = this.id;
-
-		// console.clear();
-		// for (const row of GameManager.Instance.currentScene.level.board) {
-		// 	console.log(row);
-		// }
+		[this.x, this.y] = [coords.x, coords.y];
 	}
 
 	get x(): number {
-		return this.coordX;
+		return this._x;
 	}
 
 	set x(coord: number) {
-		if (GameManager.Instance.currentScene.checkCoords(coord, this.coordY) !== TileType.Empty) return;
-
-		this.onBeforeMove();
-
-		this.coordX = coord;
+		this._x = coord;
 		this.sprite.x = coord * GameManager.Instance.resolution;
-
-		this.onAfterMove();
 	}
 
 	get y(): number {
-		return this.coordY;
+		return this._y;
 	}
 
 	set y(coord: number) {
-		if (GameManager.Instance.currentScene.checkCoords(this.coordX, coord) !== TileType.Empty) return;
-
-		this.onBeforeMove();
-
-		this.coordY = coord;
+		this._y = coord;
 		this.sprite.y = coord * GameManager.Instance.resolution;
+	}
 
-		this.onAfterMove();
+	move({ x: x, y: y }: Coords) {
+		this.moveTo({ x: x ? this.x + x : this.x, y: y ? this.y + y : this.y });
+	}
+
+	moveTo({ x: x, y: y }: Coords) {
+		if (GameManager.Instance.currentScene.checkCoords(x ?? this.x, y ?? this.y) !== TileType.Empty) return;
+		GameManager.Instance.currentScene.level.board[this.y][this.x] = TileType.Empty;
+
+		if (x) this.x = x;
+		if (y) this.y = y;
+
+		GameManager.Instance.currentScene.level.board[this.y][this.x] = this.id;
 	}
 
 	playSound(src: string, volume: number) {
