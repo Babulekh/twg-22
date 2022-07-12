@@ -9,8 +9,8 @@ interface Character {
 }
 
 class Character extends GameObject {
-	constructor(name: string, id: TileType, coords: Coords) {
-		super(name, id, coords);
+	constructor(name: string, type: TileType, coords: Coords) {
+		super(name, type, coords);
 		this.healthStats = new HealthStats(this, 100, 100, false);
 	}
 }

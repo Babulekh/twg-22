@@ -5,12 +5,11 @@ import { TileType } from '../enums';
 import { Coords } from '../interfaces';
 
 interface GameObject {
-	name: string; // name - string, тип объекта
-	id: TileType; // id - string, уникальное название объекта, берется из основного спаунера, который хранит в себе информацию о уже существующих объектах и их кол-ве
-	assetSrc: string; // assetSrc - string, путь к ассету
-	rotate: Array<number>; // rotate - double, угол поворота объекта (x, y)
-	scale: Array<number>; // scale - double, масштаб объекта
-	active: Boolean; // active - bool, активен ли объект?
+	name: string;
+	type: TileType;
+	rotate: Array<number>;
+	scale: Array<number>;
+	active: Boolean;
 	audioManager: AudioManager;
 	sprite: Sprite;
 	_x: number;
@@ -18,12 +17,11 @@ interface GameObject {
 }
 
 class GameObject {
-	constructor(name: string = 'Wall', id: TileType = TileType.Empty, coords: Coords, rotate: Array<number> = [0, 0], scale: Array<number> = [1, 1], active = true) {
+	constructor(name: string = 'Wall', type: TileType = TileType.Empty, coords: Coords, rotate: Array<number> = [0, 0], scale: Array<number> = [1, 1]) {
 		this.name = name;
-		this.id = id;
+		this.type = type;
 		this.rotate = rotate;
 		this.scale = scale;
-		this.active = active;
 		this.sprite = new Sprite(Texture.from(`../../assets/sprites/${this.name}.png`));
 
 		({ x: this.x, y: this.y } = coords);
@@ -60,7 +58,7 @@ class GameObject {
 		if (x) this.x = x;
 		if (y) this.y = y;
 
-		GameManager.Instance.currentScene.level.board[this.y][this.x] = this.id;
+		GameManager.Instance.currentScene.level.board[this.y][this.x] = this.type;
 	}
 
 	playSound(src: string) {

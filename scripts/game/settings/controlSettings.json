@@ -8,6 +8,6 @@
 		"moveLeft": "KeyA",
 		"moveRight": "KeyD",
 		"interact": "KeyE",
-		"attack": " ",
+		"attack": "Space"
 	}
 }

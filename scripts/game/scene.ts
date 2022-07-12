@@ -3,6 +3,8 @@ import { GameObject } from './gameObject';
 import { Level } from '../interfaces';
 import { TileType } from '../enums';
 import { GameManager } from './managers/gameManager';
+import { Enemy } from '../gameObjects/characters/enemy';
+import { Player } from '../gameObjects/characters/player';
 
 interface Scene {
 	container: Container;
@@ -14,8 +16,8 @@ interface Scene {
 class Scene {
 	constructor(level: Level) {
 		this.level = level;
-		this.player = new GameObject('Player', TileType.Player, { x: this.level.player.coords[0], y: this.level.player.coords[1] });
-		this.enemies = this.level.enemies.map((enemy) => new GameObject('Enemy', TileType.Enemy, { x: enemy.coords[0], y: enemy.coords[1] }));
+		this.player = new Player('Player', TileType.Player, { x: this.level.player.coords[0], y: this.level.player.coords[1] });
+		this.enemies = this.level.enemies.map((enemy) => new Enemy('Enemy', TileType.Enemy, { x: enemy.coords[0], y: enemy.coords[1] }));
 		this.container = new Container();
 	}
 

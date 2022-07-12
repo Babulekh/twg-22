@@ -7,8 +7,8 @@ interface Enemy {
 }
 
 class Enemy extends Character {
-	constructor(name: string, id: TileType, coords: Coords) {
-		super(name, id, coords);
+	constructor(name: string, type: TileType, coords: Coords) {
+		super(name, type, coords);
 		this.activeBehaviour = ActiveBehaviour.Patrol;
 	}
 }

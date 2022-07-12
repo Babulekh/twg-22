@@ -47,5 +47,3 @@ class GameManager {
 }
 
 export { GameManager };
-
-// Использование gameManager = GameManager.getInstance();
