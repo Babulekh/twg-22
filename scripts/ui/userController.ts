@@ -1,6 +1,6 @@
 import { GameManager } from '../game/managers/gameManager';
 import { Settings } from '../interfaces';
-import controlSettingsFile from './controlSettings.json';
+import controlSettingsFile from '../game/settings/controlSettings.json';
 
 interface UserController {
 	controlSettings: Settings;

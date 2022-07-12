@@ -1,0 +1,13 @@
+{
+	"mouseSensitivityX": 100,
+	"mouseSensitivityY": 100,
+	"inverted": false,
+	"keybindings": {
+		"moveUp": "KeyW",
+		"moveDown": "KeyS",
+		"moveLeft": "KeyA",
+		"moveRight": "KeyD",
+		"interact": "KeyE",
+		"attack": " ",
+	}
+}
