@@ -14,6 +14,7 @@ interface GameObject {
 	sprite: Sprite;
 	_x: number;
 	_y: number;
+	onTick: Function;
 }
 
 class GameObject {
@@ -53,12 +54,12 @@ class GameObject {
 
 	moveTo({ x: x, y: y }: Coords) {
 		if (GameManager.Instance.currentScene.checkCoords(x ?? this.x, y ?? this.y) !== TileType.Empty) return;
-		GameManager.Instance.currentScene.level.board[this.y][this.x] = TileType.Empty;
+		// GameManager.Instance.currentScene.level.board[this.y][this.x] = TileType.Empty;
 
 		if (x) this.x = x;
 		if (y) this.y = y;
 
-		GameManager.Instance.currentScene.level.board[this.y][this.x] = this.type;
+		// GameManager.Instance.currentScene.level.board[this.y][this.x] = this.type;
 	}
 
 	playSound(src: string) {

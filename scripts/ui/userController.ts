@@ -22,23 +22,23 @@ class UserController {
 	}
 
 	keyHandler({ code }: KeyboardEvent) {
-		const player = GameManager.Instance.currentScene.player;
-		switch (code) {
-			case 'KeyW':
-				player.move({ y: -1 });
-				break;
-			case 'KeyS':
-				player.move({ y: 1 });
-				break;
-			case 'KeyA':
-				player.move({ x: -1 });
-				break;
-			case 'KeyD':
-				player.move({ x: 1 });
-				break;
-			default:
-				break;
-		}
+		// const player = GameManager.Instance.currentScene.player;
+		// switch (code) {
+		// 	case 'KeyW':
+		// 		player.move({ y: -1 });
+		// 		break;
+		// 	case 'KeyS':
+		// 		player.move({ y: 1 });
+		// 		break;
+		// 	case 'KeyA':
+		// 		player.move({ x: -1 });
+		// 		break;
+		// 	case 'KeyD':
+		// 		player.move({ x: 1 });
+		// 		break;
+		// 	default:
+		// 		break;
+		// }
 
 		// console.log(this.controlSettings.keybindings[code], code);
 	}

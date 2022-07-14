@@ -8,69 +8,50 @@ import { Player } from '../gameObjects/characters/player';
 
 interface Scene {
 	container: Container;
-	level: Level;
-	player: GameObject;
-	enemies: Array<GameObject>;
+	board: Array<GameObject>;
 }
 
 class Scene {
 	constructor(level: Level) {
-		this.level = level;
-		this.player = new Player('Player', TileType.Player, { x: this.level.player.coords[0], y: this.level.player.coords[1] });
-		this.enemies = this.level.enemies.map((enemy) => new Enemy('Enemy', TileType.Enemy, { x: enemy.coords[0], y: enemy.coords[1] }));
+		this.board = [];
 		this.container = new Container();
-	}
 
-	checkCoords(x?: number, y?: number): TileType {
-		return this.level.board[y][x];
-	}
+		// Создание доски
+		level.board.forEach((row, y) => {
+			row.forEach((cell, x) => {
+				let name;
 
-	render() {
-		const { board: board } = this.level;
-
-		// 1. Рендер поля
-		for (let i = 0; i < board.length; i++) {
-			const row = board[i];
-
-			for (let j = 0; j < row.length; j++) {
-				const tile = board[i][j];
-				let sprite;
-				let texture;
-
-				switch (tile) {
-					case TileType.Enemy:
-					case TileType.Player:
+				switch (cell) {
 					case TileType.Empty:
-						texture = Texture.from('../../assets/sprites/Empty.png');
-						sprite = new Sprite(texture);
+						name = 'Empty';
 						break;
 
 					case TileType.Wall:
-						texture = Texture.from('../../assets/sprites/Wall.png');
-						sprite = new Sprite(texture);
+						name = 'Wall';
 						break;
+
 					case TileType.Base:
-						texture = Texture.from('../../assets/sprites/Base.png');
-						sprite = new Sprite(texture);
+						name = 'Base';
 						break;
-					// etc...
 				}
 
-				if (sprite) {
-					sprite.x = j * GameManager.Instance.resolution;
-					sprite.y = i * GameManager.Instance.resolution;
-					this.container.addChild(sprite);
-				}
-			}
-		}
+				this.board.push(new GameObject(name, cell, { x: x, y: y }));
+			});
+		});
 
-		// 2. Размещение игрока
-		this.container.addChild(this.player.sprite);
+		// Итерация по objects todo
 
-		// 3. Размещение врагов
-		for (const enemy of this.enemies) {
-			this.container.addChild(enemy.sprite);
-		}
+		// Запушить все объекты в this.container
+		this.board.forEach((object) => this.container.addChild(object.sprite));
+	}
+
+	checkCoords(x?: number, y?: number): TileType {
+		this.board.forEach((object) => {
+			if (object.x === x && object.y === y) return TileType.Wall;
+		});
+
+		return TileType.Empty;
+		//todo
 	}
 }
 

@@ -37,7 +37,6 @@ class GameManager {
 	set level(level: number) {
 		this.levelManager.level = level;
 		this.currentScene = this.levelManager.scene;
-		this.currentScene.render();
 		this.renderer.changeScene();
 	}
 

@@ -27,18 +27,6 @@ class Renderer {
 	changeScene() {
 		this.app.stage.removeChild();
 		this.app.stage.addChild(GameManager.Instance.currentScene.container);
-
-		const gManager = GameManager.Instance;
-
-		this.app.ticker.add((delta) => {
-			gManager.currentScene.enemies.forEach((enemy) => {
-				if (Math.random() < 0.99) return;
-
-				const axis = Math.random() > 0.5 ? 'x' : 'y';
-
-				enemy.move({ [axis]: Math.random() > 0.5 ? 1 : -1 });
-			});
-		});
 	}
 }
 
