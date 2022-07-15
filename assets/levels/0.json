@@ -12,26 +12,28 @@
 		[1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1],
 		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 	],
-	"player": {
-		"maxHealth": 100,
-		"health": 100,
-		"coords": [9, 1]
-	},
-	"enemies": [
-		{
+	"objects": {
+		"Player": {
 			"maxHealth": 100,
 			"health": 100,
-			"coords": [1, 1]
+			"coords": { "x": 9, "y": 1 }
 		},
-		{
-			"maxHealth": 100,
-			"health": 60,
-			"coords": [1, 9]
-		},
-		{
-			"maxHealth": 100,
-			"health": 75,
-			"coords": [9, 9]
-		}
-	]
+		"Enemy": [
+			{
+				"maxHealth": 100,
+				"health": 100,
+				"coords": { "x": 1, "y": 1 }
+			},
+			{
+				"maxHealth": 100,
+				"health": 60,
+				"coords": { "x": 1, "y": 9 }
+			},
+			{
+				"maxHealth": 100,
+				"health": 75,
+				"coords": { "x": 9, "y": 9 }
+			}
+		]
+	}
 }

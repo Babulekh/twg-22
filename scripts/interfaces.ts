@@ -12,8 +12,7 @@ interface EnemyObject {
 
 interface Level {
 	board: Array<Array<number>>;
-	player: PlayerObject; // TODO объединить интрефейс игрока с сещуствующим модулем
-	enemies: Array<EnemyObject>; // TODO сделать интерфейс врага
+	objects: Object;
 }
 
 interface Coords {

@@ -40,6 +40,16 @@ class Scene {
 		});
 
 		// Итерация по objects todo
+		Object.keys(level.objects).forEach((key) => {
+			// const objects: Array<Object> | Object = level.objects[key];
+
+			if (level.objects[key].constructor === Array) {
+				level.objects[key].forEach((object) => this.board.push(new GameObject(key, 3, object.coords)));
+			} else {
+				this.board.push(new GameObject(key, 3, level.objects[key].coords));
+			}
+			// todo tiletype
+		});
 
 		// Запушить все объекты в this.container
 		this.board.forEach((object) => this.container.addChild(object.sprite));
